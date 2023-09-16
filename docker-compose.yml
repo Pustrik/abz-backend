@@ -1,0 +1,35 @@
+# version of docker-compose
+version: '3.9'
+
+services:
+  app:
+    container_name: app-container
+    build: .
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+      - cache
+    environment:
+      - DB_HOST=db
+  db:
+    container_name: postgres-container
+    image: postgres:14.0-alpine
+#    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_HOST=${DB_HOST}
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    command: redis-server --save 20 1 --loglevel warning --requirepass 123456
+    volumes:
+      - ./cache:/data
