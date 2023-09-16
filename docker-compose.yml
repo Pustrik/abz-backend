@@ -6,7 +6,7 @@ services:
     container_name: app-container
     build: .
     ports:
-      - "3001:3001"
+      - ${API_PORT}:${API_PORT}
     depends_on:
       - db
       - cache
@@ -15,7 +15,7 @@ services:
   db:
     container_name: postgres-container
     image: postgres:14.0-alpine
-#    restart: always
+    restart: always
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -26,6 +26,7 @@ services:
     ports:
       - ${DB_PORT}:${DB_PORT}
   cache:
+    container_name: redis-container
     image: redis:6.2-alpine
     restart: always
     ports:

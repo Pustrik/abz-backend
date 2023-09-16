@@ -30,11 +30,11 @@ export class UserService {
   }
 
   async getUserById(id: number) {
-    const user = await this.userRepository.findOne({
+    const isUser = await this.userRepository.findOne({
       where: { id },
       relations: ['position', 'photos'],
     });
-    if (!user)
+    if (!isUser)
       throw new NotFoundException(
         'The user with the requested identifier does not exist',
         {
@@ -42,7 +42,8 @@ export class UserService {
           user_id: ['User not found'],
         },
       );
-    return { user: this.returnUser(user) };
+    const user = await this.returnUser(isUser)
+    return { user };
   }
 
   async paginateUsers(count: number, offset?: number, page?: number) {

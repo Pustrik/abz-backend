@@ -14,15 +14,15 @@ export const PositionsInfo = {
     id: PositionsEnum.DESIGNER,
   },
   SECURITY: {
-    name: 'Designer',
+    name: 'Security',
     id: PositionsEnum.SECURITY,
   },
   CONTENT_MANGER: {
-    name: 'Designer',
+    name: 'Content manager',
     id: PositionsEnum.CONTENT_MANGER,
   },
   LAWYER: {
-    name: 'Designer',
+    name: 'Lawyer',
     id: PositionsEnum.LAWYER,
   },
 };
