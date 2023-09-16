@@ -2,7 +2,7 @@
 /dist
 /node_modules
 /cache
-
+.env
 # Logs
 logs
 *.log
