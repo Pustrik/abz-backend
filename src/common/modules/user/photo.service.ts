@@ -8,6 +8,7 @@ import { S3Service } from './s3service';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfigService } from '@nestjs/config';
 import tinify from 'tinify';
+
 @Injectable()
 export class PhotoService {
   constructor(
@@ -35,7 +36,7 @@ export class PhotoService {
     return await tinify
       .fromBuffer(photo.buffer)
       .resize({
-        method: 'fit',
+        method: 'cover',
         width: 70,
         height: 70,
       })
